@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 from .config import Config
@@ -9,6 +10,8 @@ from .config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
+
+login_manager = LoginManager()
 
 # initialize applications
 # https://flask.palletsprojects.com/en/2.1.x/extensiondev/#the-extension-class-and-initialization
@@ -18,11 +21,15 @@ Bootstrap5(app)
 toolbar = DebugToolbarExtension(app)
 # https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#a-minimal-application
 db = SQLAlchemy(app)
+# https://flask-login.readthedocs.io/en/latest/#configuring-your-application
+login_manager.init_app(app)
 
 
 
 # blueprints registration
 # https://flask.palletsprojects.com/en/2.1.x/blueprints/
+from .auth import bp as auth_bp
+app.register_blueprint(auth_bp)
 from .orders import bp as orders_bp
 app.register_blueprint(orders_bp, url_prefix='/orders')
 

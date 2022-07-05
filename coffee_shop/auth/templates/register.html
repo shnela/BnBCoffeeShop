@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block custom_content %}
+  <h2>{{ title }}</h2>
+  <form method="POST">
+    <!-- https://bootstrap-flask.readthedocs.io/en/stable/macros/#render-form -->
+    {{ wtf.render_form(form) }}
+  </form>
+{% endblock %}

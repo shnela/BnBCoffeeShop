@@ -38,6 +38,26 @@
               <li><a class="dropdown-item" href="{{ url_for('orders.order_coffee') }}">{{ render_icon('plus') }} Order coffee</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              {{ render_icon('person') }}
+              {% if current_user.is_authenticated %}
+                {{ current_user.username }}
+              {% else %}
+                Anonymus user
+              {% endif %}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <!-- https://bootstrap-flask.readthedocs.io/en/stable/macros/?highlight=render_icon#render-icon -->
+              {% if current_user.is_authenticated %}
+              <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">{{ render_icon('box-arrow-in-left') }} Log out</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="{{ url_for('auth.login') }}">{{ render_icon('box-arrow-in-right') }} Login</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('auth.register') }}">{{ render_icon('ui-checks') }} Register</a></li>
+              {% endif %}
+            </ul>
+          </li>
         </ul>
       </div>
     </div>

@@ -1,4 +1,5 @@
 from flask import render_template, redirect
+from flask_login import login_required
 
 from . import bp
 from .forms import OrderCoffeeForm
@@ -9,12 +10,14 @@ from .. import db
 
 
 @bp.route("/coffee")
+@login_required
 def list_coffee_orders():
     orders = CoffeeOrder.query.all()
     return render_template("coffee_orders.html", coffee_orders=orders)
 
 
 @bp.route("/coffee/new", methods=['GET', 'POST'])
+@login_required
 def order_coffee():
     form = OrderCoffeeForm()
     if form.validate_on_submit():
