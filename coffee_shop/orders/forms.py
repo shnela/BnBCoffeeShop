@@ -11,13 +11,12 @@ from ..models import COFFEE_SIZES, COFFEE_TYPE
 class OrderCoffeeForm(FlaskForm):
     coffee_size = SelectField(
         'Coffe Size',
-        choices=COFFEE_SIZES.values(),
+        choices=COFFEE_SIZES.items(),
         validators=[DataRequired()]
     )
     coffee_type = SelectField(
         'Coffee type',
-        choices=COFFEE_TYPE.values(),
+        choices=COFFEE_TYPE.items(),
         validators=[DataRequired()]
         )
-    customer_username = StringField('Username', validators=[DataRequired()])
     submit = SubmitField('Submit')

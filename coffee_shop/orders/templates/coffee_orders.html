@@ -4,8 +4,8 @@
   <ul class="list-group">
     {% for order in coffee_orders %}
         <li class="list-group-item">
-            Coffee {{ order.coffe_size_display_name() }} ({{ order.coffe_type_display_name() }})
-            by {{ order.customer_username }}.
+            Coffee {{ order.coffe_size_display_name() }} {{ order.coffe_type_display_name() }}
+            by {{ order.customer.username }}. [{{ order.completed }}] at {{ order.creation_date }}
         </li>
     {% endfor %}
   </ul>

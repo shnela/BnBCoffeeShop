@@ -1,5 +1,8 @@
 # https://flask-sqlalchemy.palletsprojects.com/en/2.x/quickstart/#a-minimal-application
+from datetime import datetime, timezone
+
 from flask_login import UserMixin
+from sqlalchemy import null
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import db, login_manager
@@ -21,7 +24,10 @@ class CoffeeOrder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     coffee_size = db.Column(db.String(3))
     coffee_type = db.Column(db.String(3))
-    customer_username = db.Column(db.String(80), nullable=False)
+    customer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    creation_date = db.Column(db.DateTime(timezone=True), nullable=False,
+                              default=lambda: datetime.now(tz=timezone.utc))
+    completed = db.Column(db.Boolean, nullable=False, default=False)
 
     def coffe_size_display_name(self):
         return COFFEE_SIZES.get(self.coffee_size, "Unknown size")
@@ -35,7 +41,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    # posts = db.relationship('Post', backref='author', lazy='dynamic')
+    orders = db.relationship('CoffeeOrder', backref='customer', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
