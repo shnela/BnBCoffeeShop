@@ -1,19 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, FileField, StringField, SelectField
-from wtforms.validators import DataRequired, ValidationError
+# https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields
+from wtforms import SubmitField, StringField, SelectField
+from wtforms.validators import DataRequired
 
 
-COFFEE_SIZES = (
-    ('S', 'small'),
-    ('L', 'large'),
-    ('XL', 'x-large'),
-)
-COFFEE_TYPE = (
-    ('L', 'latte'),
-    ('C', 'capucino'),
-    ('A', 'americana'),
-    ('E', 'espresso'),
-)
+from ..models import COFFEE_SIZES, COFFEE_TYPE
+
+
 
 class OrderCoffeeForm(FlaskForm):
     coffee_size = SelectField(
