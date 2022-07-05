@@ -17,7 +17,10 @@
   {% block navbar %}
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url_for('index') }}">BnB</a>
+      
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img width="64" class="img-thumbnail" src="{{ url_for('static', filename='img/coffee_logo.png') }}"></img>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
         aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
