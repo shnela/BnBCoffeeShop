@@ -20,6 +20,15 @@ toolbar = DebugToolbarExtension(app)
 db = SQLAlchemy(app)
 
 
+
+# blueprints registration
+# https://flask.palletsprojects.com/en/2.1.x/blueprints/
+from .orders import bp as orders_bp
+app.register_blueprint(orders_bp, url_prefix='/orders')
+
+# index HTML
 @app.route("/")
 def index():
     return render_template("base.html")
+
+db.create_all()

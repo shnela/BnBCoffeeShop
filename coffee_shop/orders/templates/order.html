@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block custom_content %}
+  <form method="POST">
+    <!-- https://bootstrap-flask.readthedocs.io/en/stable/macros/#render-form -->
+    {{ wtf.render_form(form, form_type='horizontal') }}
+  </form>
+{% endblock %}

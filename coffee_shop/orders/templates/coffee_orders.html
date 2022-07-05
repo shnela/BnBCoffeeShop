@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block custom_content %}
+  <ul class="list-group">
+    {% for order in coffee_orders %}
+        <li class="list-group-item">
+            Coffee {{ order.coffee_type }} ({{ order.coffee_size }})
+            by {{ order.customer_username }}.
+        </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
